@@ -1,6 +1,11 @@
+import { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
 
-const Profile = ({ user, isAuthenticated }) => {
+import UserContext from '../../context/UserContext'
+
+const Profile = () => {
+  let { user } = useContext(UserContext)
+  let { isAuthenticated } = useContext(UserContext)
   return (
     <div className="container">
       {isAuthenticated ? (
