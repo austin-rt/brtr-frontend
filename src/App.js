@@ -1,7 +1,13 @@
+import Nav from './components/Nav/Nav'
+import Home from './pages/Home/Home'
+import Login from './pages/Login/Login'
+
 function App() {
   return (
     <div>
-      <h1>Test</h1>
+      <Nav />
+      <Home />
+      <Login />
     </div>
   )
 }
