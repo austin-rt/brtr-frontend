@@ -1,8 +1,15 @@
-const Nav = () => {
+import { NavLink } from 'react-router-dom'
+
+const Nav = ({ user, isAuthenticated }) => {
   return (
-    <>
-      <h1>Nav</h1>
-    </>
+    <div className="container">
+      <NavLink to="/">home</NavLink>
+      {isAuthenticated ? (
+        <NavLink to="/profile">profile</NavLink>
+      ) : (
+        <NavLink to="/login">login</NavLink>
+      )}
+    </div>
   )
 }
 
