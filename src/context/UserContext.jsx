@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Client from '../services/api'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
@@ -22,13 +23,19 @@ export const UserProvider = ({ children }) => {
       ? jwt_decode(localStorage.getItem('authTokens'))
       : null
   )
+  const [loading, setLoading] = useState(true)
   const [isAuthenticated, toggleAuthenticated] = useState(() =>
     localStorage.getItem('authTokens') ? true : false
   )
 
   const registerUser = async (e, input) => {
     e.preventDefault()
-
+    try {
+      let res = await Client.post(`${BASE_URL}/register/`, input)
+      return res.data
+    } catch (error) {
+      throw error
+    }
     // navigate('/login')
   }
 
@@ -46,9 +53,9 @@ export const UserProvider = ({ children }) => {
     if (res.status === 200) {
       setAuthTokens(data)
       setUser(jwt_decode(data.access))
+      localStorage.setItem('authTokens', JSON.stringify(data))
       toggleAuthenticated(true)
       navigate('/profile')
-      localStorage.setItem('authTokens', JSON.stringify(data))
     } else {
       console.log('oops')
     }
@@ -63,17 +70,34 @@ export const UserProvider = ({ children }) => {
   }
 
   const refreshToken = async () => {
+    console.log('updating token')
     let payload = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      refresh: JSON.stringify(authTokens, refresh)
+      body: JSON.stringify({ refresh: authTokens.refresh })
     }
-    // let res = await fetch(`${BASE_URL}/token/refresh/`, payload)
-    // let data = await res.json('res:')
-    console.log(payload.refresh)
+    let res = await fetch(`${BASE_URL}/token/refresh/`, payload)
+    let data = await res.json()
+
+    if (res.status === 200) {
+      setAuthTokens(data)
+      setUser(jwt_decode(data.access))
+      localStorage.setItem('authTokens', JSON.stringify(data))
+    } else {
+      logoutUser()
+    }
   }
+
+  useEffect(() => {
+    let refreshInterval = setInterval(() => {
+      if (authTokens) {
+        refreshToken()
+      }
+    }, 1000 * 60 * 4.95)
+    return () => clearInterval(refreshInterval)
+  }, [authTokens, loading])
 
   const data = {
     user: user,

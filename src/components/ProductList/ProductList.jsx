@@ -1,10 +1,10 @@
-import React from 'react'
+import './ProductList.css'
 
 const ProductList = ({ productsFeed }) => {
   return (
-    <div className="container product-grid-container">
+    <div className="container product__grid-container">
       {productsFeed.map((product) => (
-        <div className="product__item card" key={product.id}>
+        <div className="product__item-card" key={product.id}>
           <h2 className="product__name">{product.name}</h2>
           <h3 className="product__price">${product.price}</h3>
           <div className="product__image-container">
