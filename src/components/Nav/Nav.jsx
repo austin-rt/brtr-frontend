@@ -4,11 +4,15 @@ import UserContext from '../../context/UserContext'
 
 const Nav = () => {
   let { isAuthenticated } = useContext(UserContext)
+  let { logoutUser } = useContext(UserContext)
   return (
     <div className="container">
       <NavLink to="/">home</NavLink>
       {isAuthenticated ? (
-        <NavLink to="/profile">profile</NavLink>
+        <>
+          <NavLink to="/profile">profile</NavLink>
+          <div onClick={logoutUser}>logout</div>
+        </>
       ) : (
         <NavLink to="/login">login</NavLink>
       )}
