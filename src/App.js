@@ -13,10 +13,12 @@ import Nav from './components/Nav/Nav'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
+import Register from './pages/Register/Register'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
 function App() {
+  // console.log(BASE_URL)
   // let navigate = useNavigate()
 
   const initialFormState = {
@@ -59,6 +61,12 @@ function App() {
             }
           />
           <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/register"
+            element={
+              <Register handleChange={handleChange} formState={formState} />
+            }
+          />
         </Routes>
       </UserProvider>
     </Router>

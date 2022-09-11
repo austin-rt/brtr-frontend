@@ -2,9 +2,9 @@ import { useContext } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import UserContext from '../../context/UserContext'
 
-const Login = ({ handleChange, formState }) => {
+const Register = ({ handleChange, formState }) => {
   let { isAuthenticated } = useContext(UserContext)
-  let { loginUser } = useContext(UserContext)
+  let { registerUser } = useContext(UserContext)
 
   return (
     <div className="container">
@@ -13,10 +13,10 @@ const Login = ({ handleChange, formState }) => {
       ) : (
         <>
           <h2>
-            <Link to="/register">sign up</Link>
+            <Link to="/login">login</Link>
           </h2>
-          <h2> or login</h2>
-          <form onSubmit={(e) => loginUser(e, formState)}>
+          <h2>or sign up</h2>
+          <form onSubmit={(e) => registerUser(e, formState)}>
             <input
               type="text"
               id="username"
@@ -31,7 +31,7 @@ const Login = ({ handleChange, formState }) => {
               value={formState.password}
               onChange={handleChange}
             />
-            <button className="btn">login</button>
+            <button className="btn">sign up</button>
           </form>
         </>
       )}
@@ -39,4 +39,4 @@ const Login = ({ handleChange, formState }) => {
   )
 }
 
-export default Login
+export default Register

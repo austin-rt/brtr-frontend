@@ -1,80 +1,48 @@
 import { createContext, useState, useEffect } from 'react'
-
+import { SignInUser, RegisterUser, CheckSession } from '../services/Auth'
 import axios from 'axios'
-const BASE_URL = process.env.REACT_APP_BASE_URL
+import { useNavigate } from 'react-router-dom'
 
 const UserContext = createContext()
 
 export default UserContext
 
+const BASE_URL = process.env.REACT_APP_BASE_URL
+
 export const UserProvider = ({ children }) => {
+  let navigate = useNavigate()
   const [authTokens, setAuthTokens] = useState(null)
   const [user, setUser] = useState(null)
 
-  const getCookie = () => {
-    let cookieValue = null
-    if (document.cookie) {
-      let cookies = document.cookie.split(';')
-      cookieValue = cookies[0].toString()
-      cookieValue = cookieValue.substring(10, cookieValue.length)
-    }
-    return cookieValue
+  const registerUser = async (e, input) => {
+    e.preventDefault()
+    RegisterUser(input)
+    // navigate('/login')
   }
-
-  const checkSession = async (token) => {
-    let csrfToken = decodeURIComponent(document.cookie)
-    let tokenObj = {
-      token: token.access,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': getCookie(csrfToken),
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json'
-      }
-    }
-    let userSession = await checkToken(tokenObj)
-    if (!userSession) {
-      tokenObj = {
-        ...tokenObj,
-        token: token.refresh
-      }
-      userSession = await refreshToken(tokenObj)
-    }
-    setUser(userSession)
-    setIsLoggedIn(true)
-  }
-
-  useEffect(() => {
-    const checkTokenStatus = async () => {
-      let token = {
-        access: localStorage.getItem('token_access'),
-        refresh: localStorage.getItem('token_refresh')
-      }
-      if (token) {
-        checkSession(token)
-      }
-    }
-    checkTokenStatus()
-  }, [setIsLoggedIn])
 
   const loginUser = async (e, input) => {
     e.preventDefault()
     let payload = {
       method: 'POST',
       headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': getCookie(csrfToken),
-        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json'
       },
-      body: { ...input }
+      body: JSON.stringify({ ...input })
     }
-
-    let res = await axios.post(`${BASE_URL}/token`, payload)
-    console.log(res)
+    let res = await fetch(`${BASE_URL}/token/`, payload)
+    let data = await res.json('res:')
+    console.log('data:', data)
+    console.log('res:', res)
+    if (res.status === 200) {
+      setAuthTokens(data)
+      setUser(data.access)
+    } else {
+      console.log('oops')
+    }
   }
 
   const data = {
+    registerUser: registerUser,
     loginUser: loginUser
   }
 
