@@ -1,7 +1,8 @@
 import { createContext, useState, useEffect } from 'react'
 import { SignInUser, RegisterUser, CheckSession } from '../services/Auth'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 const UserContext = createContext()
 
@@ -35,7 +36,8 @@ export const UserProvider = ({ children }) => {
     console.log('res:', res)
     if (res.status === 200) {
       setAuthTokens(data)
-      setUser(data.access)
+      setUser(jwt_decode(data.access))
+      console.log(user.username)
     } else {
       console.log('oops')
     }
