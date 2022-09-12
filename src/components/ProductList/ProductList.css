@@ -1,19 +1,24 @@
-.product__grid-container{
+.product__list-container{
   display: flex;
+}
 
+.product__hero-info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .product__item-card {
   border: black 1px solid;
-  max-width: 25rem;
-  max-height: 25rem;
+  width: 20rem;
+  height: 20rem;
   margin: 1rem;
   overflow: hidden;
 }
 
 .product__image-container{
-  max-width: 100%;
-  max-height: 75%;
+  margin: 0 auto;
+  width: max-content;
+  height: 75%;
   overflow: hidden;
 }
 

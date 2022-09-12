@@ -1,3 +1,4 @@
+import './Nav.css'
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import UserContext from '../../context/UserContext'
@@ -7,11 +8,17 @@ const Nav = () => {
   let { logoutUser } = useContext(UserContext)
   return (
     <div className="container">
-      <NavLink to="/">home</NavLink>
+      <NavLink to="/" className="nav__link">
+        home
+      </NavLink>
       {isAuthenticated ? (
         <>
-          <NavLink to="/profile">profile</NavLink>
-          <div onClick={logoutUser}>logout</div>
+          <NavLink to="/profile" className="nav__link">
+            profile
+          </NavLink>
+          <div onClick={logoutUser} className="nav__logout">
+            logout
+          </div>
         </>
       ) : (
         <NavLink to="/login">login</NavLink>

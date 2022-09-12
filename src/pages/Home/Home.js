@@ -1,11 +1,11 @@
 import Header from '../../components/Header/Header'
 import ProductList from '../../components/ProductList/ProductList'
 
-const Home = ({ productsFeed }) => {
+const Home = ({ productsFeed, chooseProduct }) => {
   return (
     <div className="container">
       <Header />
-      <ProductList productsFeed={productsFeed} />
+      <ProductList productsFeed={productsFeed} chooseProduct={chooseProduct} />
     </div>
   )
 }

@@ -1,0 +1,7 @@
+.nav__link {
+  margin: .5rem;
+}
+
+.nav__logout {
+  display: inline;
+}

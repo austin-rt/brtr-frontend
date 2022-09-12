@@ -13,6 +13,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 export const UserProvider = ({ children }) => {
   const navigate = useNavigate()
 
+  const [userDetails, setUserDetails] = useState(null)
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
       ? JSON.parse(localStorage.getItem('authTokens'))
@@ -32,6 +33,7 @@ export const UserProvider = ({ children }) => {
     e.preventDefault()
     try {
       let res = await Client.post(`${BASE_URL}/register/`, input)
+      navigate('/login')
       return res.data
     } catch (error) {
       throw error
@@ -56,6 +58,7 @@ export const UserProvider = ({ children }) => {
       localStorage.setItem('authTokens', JSON.stringify(data))
       toggleAuthenticated(true)
       navigate('/profile')
+      // clear formState
     } else {
       console.log('oops')
     }
@@ -64,13 +67,13 @@ export const UserProvider = ({ children }) => {
   const logoutUser = () => {
     setAuthTokens(null)
     setUser(null)
+    setUserDetails(null)
     localStorage.removeItem('authTokens')
     toggleAuthenticated(false)
     navigate('/login')
   }
 
   const refreshToken = async () => {
-    console.log('updating token')
     let payload = {
       method: 'POST',
       headers: {
@@ -99,8 +102,19 @@ export const UserProvider = ({ children }) => {
     return () => clearInterval(refreshInterval)
   }, [authTokens, loading])
 
+  useEffect(() => {
+    const getUserById = async () => {
+      if (user) {
+        let res = await axios.get(`${BASE_URL}/users/${user.user_id}`)
+        setUserDetails(res.data)
+      }
+    }
+    getUserById()
+  }, [user])
+
   const data = {
     user: user,
+    userDetails: userDetails,
     isAuthenticated: isAuthenticated,
     registerUser: registerUser,
     loginUser: loginUser,

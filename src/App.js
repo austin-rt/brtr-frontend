@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate
-} from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 
@@ -14,12 +9,12 @@ import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
 import Register from './pages/Register/Register'
+import ProductDetails from './pages/PoductDetails/ProductDetails'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
 function App() {
-  // console.log(BASE_URL)
-  // let navigate = useNavigate()
+  let navigate = useNavigate()
 
   const initialFormState = {
     username: '',
@@ -28,6 +23,7 @@ function App() {
 
   const [formState, setFormState] = useState(initialFormState)
   const [productsFeed, setProductsFeed] = useState([])
+  const [selectedProduct, setSelectedProduct] = useState(null)
 
   const handleChange = (e) => {
     const { id, value } = e.target
@@ -44,32 +40,41 @@ function App() {
     getProducts()
   }, [])
 
+  const chooseProduct = (selected) => {
+    setSelectedProduct(selected)
+    navigate(`/products/${selected.id}`)
+  }
+
   return (
-    <Router>
-      <UserProvider>
-        <Nav />
-        <Routes>
-          <Route
-            path="/"
-            exact
-            element={<Home productsFeed={productsFeed} />}
-          />
-          <Route
-            path="/login"
-            element={
-              <Login handleChange={handleChange} formState={formState} />
-            }
-          />
-          <Route path="/profile" element={<Profile />} />
-          <Route
-            path="/register"
-            element={
-              <Register handleChange={handleChange} formState={formState} />
-            }
-          />
-        </Routes>
-      </UserProvider>
-    </Router>
+    <UserProvider>
+      <Nav />
+      <Routes>
+        <Route
+          path="/"
+          exact
+          index
+          element={
+            <Home productsFeed={productsFeed} chooseProduct={chooseProduct} />
+          }
+        />
+        <Route
+          path="/login"
+          element={<Login handleChange={handleChange} formState={formState} />}
+        />
+        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/register"
+          element={
+            <Register handleChange={handleChange} formState={formState} />
+          }
+        />
+        <Route
+          path="/products/:productId"
+          element={<ProductDetails selectedProduct={selectedProduct} />}
+        />
+        {/* <Route path="/user/:userId" element={<UserDetail />} /> */}
+      </Routes>
+    </UserProvider>
   )
 }
 
