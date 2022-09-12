@@ -6,7 +6,7 @@ const ProductList = ({ productsFeed, chooseProduct }) => {
       {productsFeed.map((product) => (
         <div className="product__item-card" key={product.id}>
           <div className="product__hero-info">
-            <div classname="product__info-left-column">
+            <div className="product__info-left-column">
               <h2 className="product__name">{product.name}</h2>
               <h3 className="product__price">${product.price}</h3>
             </div>
