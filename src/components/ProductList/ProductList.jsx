@@ -10,7 +10,7 @@ const ProductList = ({ productsFeed, chooseProduct }) => {
               <h2 className="product__name">{product.name}</h2>
               <h3 className="product__price">${product.price}</h3>
             </div>
-            <div classname="product__info-right-column">
+            <div className="product__info-right-column">
               <div className="product__purchase-options-container">
                 <p className="product__purchase-option">
                   for sale {product.for_sale ? '✅' : '❌'}

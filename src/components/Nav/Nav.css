@@ -1,7 +1,21 @@
+nav{
+  display: flex;
+}
+
+.nav__links{
+  display: flex;
+  align-items: center;
+}
+
 .nav__link {
   margin: .5rem;
 }
 
+.nav__link:first-child{
+  margin-left: auto;
+}
+
 .nav__logout {
   display: inline;
+  cursor: pointer;
 }

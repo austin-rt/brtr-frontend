@@ -7,23 +7,26 @@ const Nav = () => {
   let { isAuthenticated } = useContext(UserContext)
   let { logoutUser } = useContext(UserContext)
   return (
-    <div className="container">
-      <NavLink to="/" className="nav__link">
-        home
-      </NavLink>
-      {isAuthenticated ? (
-        <>
-          <NavLink to="/profile" className="nav__link">
-            profile
-          </NavLink>
-          <div onClick={logoutUser} className="nav__logout">
-            logout
-          </div>
-        </>
-      ) : (
-        <NavLink to="/login">login</NavLink>
-      )}
-    </div>
+    <nav>
+      <h1 className="nav__title">brtr</h1>
+      <div className="container nav__links">
+        <NavLink to="/" className="nav__link">
+          home
+        </NavLink>
+        {isAuthenticated ? (
+          <>
+            <NavLink to="/profile" className="nav__link">
+              profile
+            </NavLink>
+            <div onClick={logoutUser} className="nav__logout nav__link">
+              logout
+            </div>
+          </>
+        ) : (
+          <NavLink to="/login">login</NavLink>
+        )}
+      </div>
+    </nav>
   )
 }
 
