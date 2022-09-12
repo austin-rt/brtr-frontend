@@ -1,6 +1,7 @@
 import './ProductDetails.css'
 
 const ProductDetails = ({ selectedProduct }) => {
+  console.log(selectedProduct)
   const addToCart = () => {
     console.log(`clicked product no ${selectedProduct.id}`)
   }
@@ -35,6 +36,17 @@ const ProductDetails = ({ selectedProduct }) => {
             <button className="btn" onClick={addToCart}>
               add to cart
             </button>
+          </div>
+          <div className="product__reviews-container">
+            <h2>Reviews</h2>
+            {selectedProduct.reviews.map((review) => (
+              <div className="product__review" key={review.id}>
+                <h3>{review.title}</h3>
+                <h4>{review.rating}</h4>
+                <p>{review.body}</p>
+                <p>{review.reviewer.username}</p>
+              </div>
+            ))}
           </div>
         </div>
       )}

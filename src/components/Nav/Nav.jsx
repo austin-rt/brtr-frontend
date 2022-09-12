@@ -8,7 +8,9 @@ const Nav = () => {
   let { logoutUser } = useContext(UserContext)
   return (
     <nav>
-      <h1 className="nav__title">brtr</h1>
+      <h1 className="nav__title">
+        <NavLink to="/">brtr</NavLink>
+      </h1>
       <div className="container nav__links">
         <NavLink to="/" className="nav__link">
           home
