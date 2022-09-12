@@ -24,7 +24,6 @@ export const UserProvider = ({ children }) => {
       ? jwt_decode(localStorage.getItem('authTokens'))
       : null
   )
-  const [loading, setLoading] = useState(true)
   const [isAuthenticated, toggleAuthenticated] = useState(() =>
     localStorage.getItem('authTokens') ? true : false
   )
@@ -100,7 +99,7 @@ export const UserProvider = ({ children }) => {
       }
     }, 1000 * 60 * 4.95)
     return () => clearInterval(refreshInterval)
-  }, [authTokens, loading])
+  }, [authTokens])
 
   useEffect(() => {
     const getUserById = async () => {

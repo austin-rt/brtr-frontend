@@ -19,6 +19,7 @@ const ProductDetails = ({ selectedProduct }) => {
             <img
               className="product-details__image"
               src={selectedProduct.image}
+              alt={selectedProduct.name}
             />
           </div>
           <p className="product-description">{selectedProduct.description}</p>

@@ -26,6 +26,7 @@ const ProductList = ({ productsFeed, chooseProduct }) => {
               className="product__image"
               onClick={() => chooseProduct(product)}
               src={product.image}
+              alt={product.name}
             />
           </div>
           <p className="product__description">{product.description}</p>
