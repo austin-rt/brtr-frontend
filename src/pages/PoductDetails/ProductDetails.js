@@ -35,15 +35,19 @@ const ProductDetails = ({
         </div>
       ) : (
         <div className="product-details">
-          <h2 className="product-details__name">{selectedProduct?.name}</h2>
-          <h2 className="product-details__price">
-            ${selectedProduct?.price?.toLocaleString('en-US')}
-          </h2>
-          <div className="product__purchase-options-container">
-            <p className="product__purchase-option">for sale ✅</p>
-            <p className="product__purchase-option">
-              for trade {selectedProduct?.price < 4000 ? '✅' : '❌'}
-            </p>
+          <div className="product-details__hero-info-grid-container">
+            <div className="product-details__hero-info-left-column">
+              <h2 className="product-details__name">{selectedProduct?.name}</h2>
+              <h2 className="product-details__price">
+                ${selectedProduct?.price?.toLocaleString('en-US')}
+              </h2>
+            </div>
+            <div className="product__purchase-options-container product-details__hero-info-right-column">
+              <p className="product__purchase-option">for sale ✅</p>
+              <p className="product__purchase-option">
+                for trade {selectedProduct?.price < 4000 ? '✅' : '❌'}
+              </p>
+            </div>
           </div>
           <div className="product-details__image-container">
             <img

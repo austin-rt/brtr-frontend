@@ -8,6 +8,17 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
+  border: 5px solid black;
+}
+
+.product-details__hero-info-grid-container{
+display: grid;
+grid-template-columns: 1fr 1fr;
+}
+
+.product-details__image-container{
+margin: 2rem auto;
+width: max-content
 }
 
 .product-details__image {
@@ -43,8 +54,9 @@
 
 .product__review {
   max-width: 30rem;
-  margin: 3rem auto;
-  border-bottom: 1px solid black;
+  margin: 2rem 2rem;;
+  padding: 0 1rem;
+  border: 5px solid black;
 }
 
 .product__review-hero-content {
