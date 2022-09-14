@@ -1,18 +1,17 @@
 nav{
   display: flex;
+  align-items: center;
+  box-shadow: 0 2px 0px 0 rgba(0, 0, 0, .2);
+  padding: 0 3rem;
 }
 
 .nav__links{
   display: flex;
-  align-items: center;
+  margin-left: auto;
 }
 
 .nav__link {
   margin: .5rem;
-}
-
-.nav__link:first-child{
-  margin-left: auto;
 }
 
 .nav__logout {

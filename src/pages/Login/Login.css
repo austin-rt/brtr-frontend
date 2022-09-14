@@ -1,0 +1,34 @@
+.login__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.login__header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.login__form-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.login__or {
+  margin-bottom: 2.5rem;
+}
+
+.login__register {
+  transition: all 400ms ease;
+  margin-bottom: 2.5rem;
+  text-decoration: underline;
+}
+
+.login__register:hover {
+  text-decoration: none;
+}
+
+.login__guest-btn {
+  scale: 1.2;
+}

@@ -1,0 +1,29 @@
+.register__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register__form-container {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  display: block;
+}
+
+.register__guest-btn {
+  margin: 0 auto;
+  margin-top: 2rem;
+  scale: 1.2;
+}
+
+.register__login {
+  text-decoration: underline;
+  margin-top: 2rem;
+}
+
+.register__login:hover {
+  text-decoration: none;
+}

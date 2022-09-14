@@ -11,7 +11,7 @@ const Nav = () => {
       <h1 className="nav__title">
         <NavLink to="/">brtr</NavLink>
       </h1>
-      <div className="container nav__links">
+      <div className="nav__links">
         <NavLink to="/" className="nav__link">
           home
         </NavLink>
@@ -25,7 +25,7 @@ const Nav = () => {
             </div>
           </>
         ) : (
-          <NavLink to="/login">login</NavLink>
+          <NavLink to="/login" className="nav__link">login</NavLink>
         )}
       </div>
     </nav>

@@ -19,8 +19,8 @@
 
   --transition: all 400ms ease;
 
-  --container-width-lg: 75%;
-  --container-width-md: 86%;
+  --container-width-lg: 85%;
+  --container-width-md: 90%;
   --container-width-sm: 90%;
 }
 
@@ -61,11 +61,22 @@ h1 {
   font-size: 3rem;
 }
 
+h2 {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
 h5 {
   font-size: 1.25rem;
 }
 
-input {
+input,
+textarea {
   border: rgb(0, 0, 0) 1px solid;
   padding: .75rem 1.2rem;
   margin: 0 2rem;
@@ -94,8 +105,14 @@ input {
 }
 
 .btn-alt {
+  background: var(--color-bg);
+  color: var(--color-promary);
+}
+
+.btn-alt:hover {
   background: var(--color-primary);
   color: var(--color-bg);
+  border-color: var(--color-primary);
 }
 
 @media screen and (max-width: 1024px) {

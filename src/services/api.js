@@ -2,17 +2,7 @@ import Axios from 'axios'
 
 export const BASE_URL = process.env.REACT_APP_BASE_URL
 
-const Client = Axios.create({
-  baseURL: BASE_URL,
-  timeout: 5000,
-  headers: {
-    Authorization: localStorage.getItem('access_token')
-      ? 'JWT ' + localStorage.getItem('access_token')
-      : null,
-    'Content-Type': 'application/json',
-    accept: 'application/json'
-  }
-})
+const Client = Axios.create({baseURL: BASE_URL})
 
 Client.interceptors.request.use(
   (config) => {

@@ -2,7 +2,6 @@ import { createContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 import axios from 'axios'
-import jwt_decode from 'jwt-decode'
 
 const UserContext = createContext()
 
@@ -13,111 +12,94 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 export const UserProvider = ({ children }) => {
   const navigate = useNavigate()
 
-  const [userDetails, setUserDetails] = useState(null)
-  const [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem('authTokens')
-      ? JSON.parse(localStorage.getItem('authTokens'))
-      : null
-  )
-  const [user, setUser] = useState(() =>
-    localStorage.getItem('authTokens')
-      ? jwt_decode(localStorage.getItem('authTokens'))
-      : null
-  )
-  const [isAuthenticated, toggleAuthenticated] = useState(() =>
-    localStorage.getItem('authTokens') ? true : false
-  )
-
-  const registerUser = async (e, input) => {
-    e.preventDefault()
+  const RegisterUser = async (data) => {
     try {
-      let res = await Client.post(`${BASE_URL}/register/`, input)
-      navigate('/login')
-      return res.data
+      const res = await Client.post('/users/register', data);
+      return res.data;
     } catch (error) {
-      throw error
+      throw error;
     }
-    // navigate('/login')
+  };
+
+  const LoginUser = async (data) => {
+    try {
+      const res = await Client.post(`${BASE_URL}/users/login`, data)
+      localStorage.setItem('token', res.data.token)
+      setUser(res.data.user)
+      toggleAuthenticated(true)
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const CheckSession = async () => {
+    try {
+      const res = await Client.get('/users/session');
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const checkToken = async () => {
+    const user = await CheckSession()
+    setUser(user)
+    toggleAuthenticated(true)
   }
 
-  const loginUser = async (e, input) => {
-    e.preventDefault()
-    let payload = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ...input })
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
     }
-    let res = await fetch(`${BASE_URL}/token/`, payload)
-    let data = await res.json('res:')
-    if (res.status === 200) {
-      setAuthTokens(data)
-      setUser(jwt_decode(data.access))
-      localStorage.setItem('authTokens', JSON.stringify(data))
-      toggleAuthenticated(true)
-      navigate('/profile')
-      // clear formState
-    } else {
-      console.log('oops')
-    }
-  }
+  }, [])
+
+  const [userDetails, setUserDetails] = useState(null)
+  const [token, settoken] = useState(null)
+  const [user, setUser] = useState(null)
+  const [isAuthenticated, toggleAuthenticated] = useState(null)
 
   const logoutUser = () => {
-    setAuthTokens(null)
+    settoken(null)
     setUser(null)
     setUserDetails(null)
-    localStorage.removeItem('authTokens')
+    localStorage.removeItem('token')
     toggleAuthenticated(false)
     navigate('/login')
   }
 
-  const refreshToken = async () => {
-    let payload = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ refresh: authTokens.refresh })
+  const getUserById = async () => {
+    if (user) {
+      let res = await axios.get(`${BASE_URL}/users/${user.id}`)
+      setUserDetails(res.data)
     }
-    let res = await fetch(`${BASE_URL}/token/refresh/`, payload)
-    let data = await res.json()
+  }
+  useEffect(() => {
+    getUserById()
+  }, [user])
 
-    if (res.status === 200) {
-      setAuthTokens(data)
-      setUser(jwt_decode(data.access))
-      localStorage.setItem('authTokens', JSON.stringify(data))
-    } else {
-      logoutUser()
-    }
+    const [productsFeed, setProductsFeed] = useState([])
+  const getProducts = async () => {
+    const res = await axios.get(`${BASE_URL}/products/`)
+    const allProducts = res.data
+    setProductsFeed(allProducts)
   }
 
   useEffect(() => {
-    let refreshInterval = setInterval(() => {
-      if (authTokens) {
-        refreshToken()
-      }
-    }, 1000 * 60 * 4.95)
-    return () => clearInterval(refreshInterval)
-  }, [authTokens])
-
-  useEffect(() => {
-    const getUserById = async () => {
-      if (user) {
-        let res = await axios.get(`${BASE_URL}/users/${user.user_id}`)
-        setUserDetails(res.data)
-      }
-    }
-    getUserById()
-  }, [user])
+    getProducts()
+  }, [])
 
   const data = {
     user: user,
     userDetails: userDetails,
     isAuthenticated: isAuthenticated,
-    registerUser: registerUser,
-    loginUser: loginUser,
-    logoutUser: logoutUser
+    productsFeed: productsFeed,
+    setUser: setUser,
+    RegisterUser: RegisterUser,
+    LoginUser: LoginUser,
+    logoutUser: logoutUser,
+    getProducts: getProducts,
+    getUserById: getUserById
   }
 
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>
