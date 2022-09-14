@@ -70,7 +70,18 @@ const Profile = ({
             <section className="profile__user-reviews-container">
               <h2 className="profile__section-header">your user reviews</h2>
               {userDetails?.user_reviews_posted?.map((review) => (
-                <>{review.title}</>
+                <div className="profile__review" key={review.id}>
+                  <div className="profile__review-hero-content">
+                    <h3 className="profile__review-title">{review.title}</h3>
+                    <h3 className="profile__review-rating">
+                      rating: {review.rating}/5
+                    </h3>
+                  </div>
+                  <p className="profile__review-body">{review.body}</p>
+                  <p className="profile__review-reviewer">
+                    -{review.reviewer?.username}
+                  </p>
+                </div>
               ))}
             </section>
           ) : (
@@ -82,9 +93,20 @@ const Profile = ({
           )}
           {userDetails?.reviewer?.length > 0 ? (
             <section className="profile__product-reviews-container">
-              <h2 className="profile__section-header">your user reviews</h2>
+              <h2 className="profile__section-header">your product reviews</h2>
               {userDetails?.reviewer?.map((review) => (
-                <>{review.title}</>
+                <div className="profile__review" key={review.id}>
+                  <div className="profile__review-hero-content">
+                    <h3 className="profile__review-title">{review.title}</h3>
+                    <h3 className="profile__review-rating">
+                      rating: {review.rating}/5
+                    </h3>
+                  </div>
+                  <p className="profile__review-body">{review.body}</p>
+                  <p className="profile__review-reviewer">
+                    -{review.reviewer?.username}
+                  </p>
+                </div>
               ))}
             </section>
           ) : (

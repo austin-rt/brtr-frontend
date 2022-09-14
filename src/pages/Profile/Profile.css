@@ -3,3 +3,35 @@
   flex-direction: row;
   justify-content: space-around;
 }
+
+.profile__reviews-container {
+  width: 80vw;
+  height: 12rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.profile__reviews-header {
+  text-align: center;
+}
+
+.profile__review {
+  max-width: 30rem;
+  margin: 3rem;
+  border-bottom: 1px solid black;
+}
+
+.profile__review-hero-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile__review-rating {
+  margin-left: auto;
+}
+
+.profile__review-reviewer {
+  text-align: right;
+}
