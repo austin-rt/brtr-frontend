@@ -5,22 +5,29 @@
 }
 
 .product__item-card {
-  border: black 1px solid;
+  border: black 5px solid;
   width: 25rem;
-  height: 30rem;
+  height: max-content;
   margin: 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: var(--transition);
+}
+
+.product__item-card:hover{
+  scale: 1.01;
 }
 
 .product__hero-info {
   background-color: white;
   position: relative;
   padding: 0 15px 0 20px;
-  height: 10rem;
+  height: max-content;
   overflow: hidden;
+  border-top: 5px black solid;
 }
+
 
 .product__hero-info-grid {
   display: grid;

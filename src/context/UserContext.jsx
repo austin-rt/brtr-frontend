@@ -14,12 +14,12 @@ export const UserProvider = ({ children }) => {
 
   const RegisterUser = async (data) => {
     try {
-      const res = await Client.post('/users/register', data);
-      return res.data;
+      const res = await Client.post('/users/register', data)
+      return res.data
     } catch (error) {
-      throw error;
+      throw error
     }
-  };
+  }
 
   const LoginUser = async (data) => {
     try {
@@ -28,18 +28,18 @@ export const UserProvider = ({ children }) => {
       setUser(res.data.user)
       toggleAuthenticated(true)
     } catch (error) {
-      throw error;
+      throw error
     }
-  };
+  }
 
   const CheckSession = async () => {
     try {
-      const res = await Client.get('/users/session');
-      return res.data;
+      const res = await Client.get('/users/session')
+      return res.data
     } catch (error) {
-      throw error;
+      throw error
     }
-  };
+  }
 
   const checkToken = async () => {
     const user = await CheckSession()
@@ -78,7 +78,7 @@ export const UserProvider = ({ children }) => {
     getUserById()
   }, [user])
 
-    const [productsFeed, setProductsFeed] = useState([])
+  const [productsFeed, setProductsFeed] = useState([])
   const getProducts = async () => {
     const res = await axios.get(`${BASE_URL}/products/`)
     const allProducts = res.data

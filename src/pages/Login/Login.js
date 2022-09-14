@@ -9,7 +9,7 @@ const Login = ({ handleChange, formState, setFormState, initialFormState }) => {
   const navigate = useNavigate()
 
   const loginUser = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     await LoginUser(formState)
     setFormState(initialFormState)
     navigate('/profile')
@@ -21,33 +21,33 @@ const Login = ({ handleChange, formState, setFormState, initialFormState }) => {
         <Navigate to="/profile" />
       ) : (
         <>
-          <div className='login__header-container'>
-            <h1 className='login__hero-header'>
-              login
-            </h1>
+          <div className="login__header-container">
+            <h1 className="login__hero-header">login</h1>
           </div>
-          <div className='login__form-container'>
-          <form onSubmit={loginUser}>
-            <input
-              type="text"
-              id="username"
-              placeholder="username"
-              value={formState.username}
-              onChange={handleChange}
+          <div className="login__form-container">
+            <form onSubmit={loginUser}>
+              <input
+                type="text"
+                id="username"
+                placeholder="username"
+                value={formState.username}
+                onChange={handleChange}
               />
-            <input
-              type="password"
-              id="password"
-              placeholder="password"
-              value={formState.password}
-              onChange={handleChange}
+              <input
+                type="password"
+                id="password"
+                placeholder="password"
+                value={formState.password}
+                onChange={handleChange}
               />
-            <button className="btn">login</button>
-          </form>
-              </div>
-          <div className='login__register-container'>
-              <h1 className='login__register'><Link to="/register">register</Link></h1>
-              <button className='btn login__guest-btn'>continue as guest</button>
+              <button className="btn">login</button>
+            </form>
+          </div>
+          <div className="login__register-container">
+            <h1 className="login__register">
+              <Link to="/register">register</Link>
+            </h1>
+            <button className="btn login__guest-btn">continue as guest</button>
           </div>
         </>
       )}

@@ -25,7 +25,9 @@ const Nav = () => {
             </div>
           </>
         ) : (
-          <NavLink to="/login" className="nav__link">login</NavLink>
+          <NavLink to="/login" className="nav__link">
+            login
+          </NavLink>
         )}
       </div>
     </nav>
