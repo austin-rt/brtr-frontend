@@ -4,6 +4,14 @@
   justify-content: space-around;
 }
 
+.profile__user-reviews-container,
+.profile__product-reviews-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
 .profile__reviews-container {
   width: 80vw;
   height: 12rem;

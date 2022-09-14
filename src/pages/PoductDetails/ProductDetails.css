@@ -29,11 +29,12 @@
 }
 
 .product__reviews-container {
+  margin: 0 auto;
   width: 80vw;
   height: 12rem;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
+  justify-content: center;
 }
 
 .product__reviews-header {
