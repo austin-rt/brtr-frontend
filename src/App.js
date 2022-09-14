@@ -50,6 +50,10 @@ function App() {
   const chooseProduct = (selected) => {
     setSelectedProduct(selected)
     navigate(`/products/${selected?.id}`)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   const addToCart = (id) => {
