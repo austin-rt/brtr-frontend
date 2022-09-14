@@ -69,7 +69,7 @@ const ProductModalForm = ({
           />
           <input
             type="number"
-            step="0.1"
+            step="0.01"
             min="0"
             id="price"
             placeholder="price"

@@ -52,15 +52,14 @@ export const UserProvider = ({ children }) => {
     if (token) {
       checkToken()
     }
+    // eslint-disable-next-line
   }, [])
 
   const [userDetails, setUserDetails] = useState(null)
-  const [token, settoken] = useState(null)
   const [user, setUser] = useState(null)
   const [isAuthenticated, toggleAuthenticated] = useState(null)
 
   const logoutUser = () => {
-    settoken(null)
     setUser(null)
     setUserDetails(null)
     localStorage.removeItem('token')
@@ -76,6 +75,7 @@ export const UserProvider = ({ children }) => {
   }
   useEffect(() => {
     getUserById()
+    // eslint-disable-next-line
   }, [user])
 
   const [productsFeed, setProductsFeed] = useState([])

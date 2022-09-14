@@ -84,18 +84,15 @@ function App() {
     e.preventDefault()
     try {
       const res = await Client.put(`products/${data.id}`, data)
-    } catch (error) {
-      throw error
-    }
-    try {
       getProducts()
       getUserById()
       navigate('/profile')
+      toggleModalVisibility(false)
+      setProductFormState(initialProductFormState)
+      return res
     } catch (error) {
       throw error
     }
-    toggleModalVisibility(false)
-    setProductFormState(initialProductFormState)
   }
 
   const deleteListing = async (id) => {

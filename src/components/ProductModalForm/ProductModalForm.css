@@ -1,18 +1,23 @@
 .product-modal__container {
   margin: 0 auto;
   z-index: 1;
-  background: white;
   height: 60vh;
   width: 50vh;
   position: fixed;
-  border: 1px solid black;
-  left: 25%;
+  left: 0;
+  width: 100%;
   top: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .product-modal__form-container {
-  margin: 0 auto;
+  background: white;
+  border: 1px solid black;
   display: flex;
+  width: 25rem;
+  margin: 0 auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
