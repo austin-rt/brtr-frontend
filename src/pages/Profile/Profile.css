@@ -11,7 +11,6 @@
   flex-wrap: wrap;
 }
 
-
 .profile__reviews-container {
   width: 80vw;
   height: 12rem;
@@ -26,7 +25,7 @@
 
 .profile__review {
   max-width: 30rem;
-  margin: 3rem;
+  margin: 3rem auto;
   border-bottom: 1px solid black;
 }
 
