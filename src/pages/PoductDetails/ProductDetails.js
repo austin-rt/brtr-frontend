@@ -53,7 +53,7 @@ const ProductDetails = ({
             />
           </div>
           <div className="product-details__description-container">
-            <h2>user description:</h2>
+            <h2>seller description:</h2>
             <p className="product-details__description">
               {selectedProduct?.description}
             </p>
