@@ -37,7 +37,6 @@ body {
   color: var(--color-primary);
   line-height: 1.7;
   text-transform: lowercase;
-  /* background-image: url(../src/assets/bg-texture-2.png); */
 }
 
 a {

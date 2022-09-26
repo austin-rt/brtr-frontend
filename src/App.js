@@ -12,13 +12,17 @@ import ProductDetails from './pages/PoductDetails/ProductDetails'
 import UserListings from './components/UserListings/UserListings'
 import UserContext from './context/UserContext'
 import Client from './services/api'
+import Cart from './pages/Cart/Cart'
+
+import { useCart, useDispatchCart } from './context/CartContext'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
 function App() {
-  let navigate = useNavigate()
-
-  let { productsFeed, getProducts, getUserById } = useContext(UserContext)
+  const navigate = useNavigate()
+  const dispatch = useDispatchCart()
+  const cartItems = useCart()
+  const { productsFeed, getProducts, getUserById } = useContext(UserContext)
 
   const initialFormState = {
     username: '',
@@ -34,7 +38,6 @@ function App() {
   }
 
   const [formState, setFormState] = useState(initialFormState)
-
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [modalVisibility, toggleModalVisibility] = useState(false)
   const [productFormState, setProductFormState] = useState(
@@ -56,8 +59,12 @@ function App() {
     })
   }
 
-  const addToCart = (id) => {
-    console.log(`clicked product no ${id}`)
+  const addToCartHandler = (product) => {
+    dispatch({ type: 'ADD', product })
+  }
+
+  const removeFromCart = (index) => {
+    dispatch({ type: 'REMOVE', index })
   }
 
   const leaveReview = (id) => {
@@ -121,7 +128,7 @@ function App() {
               toggleModalVisibility={toggleModalVisibility}
               productsFeed={productsFeed}
               chooseProduct={chooseProduct}
-              addToCart={addToCart}
+              addToCartHandler={addToCartHandler}
               editListing={editListing}
               leaveReview={leaveReview}
               deleteListing={deleteListing}
@@ -152,7 +159,7 @@ function App() {
               modalVisibility={modalVisibility}
               toggleModalVisibility={toggleModalVisibility}
               chooseProduct={chooseProduct}
-              addToCart={addToCart}
+              addToCartHandler={addToCartHandler}
               editListing={editListing}
               leaveReview={leaveReview}
               deleteListing={deleteListing}
@@ -180,7 +187,7 @@ function App() {
               modalVisibility={modalVisibility}
               toggleModalVisibility={toggleModalVisibility}
               selectedProduct={selectedProduct}
-              addToCart={addToCart}
+              addToCartHandler={addToCartHandler}
               editListing={editListing}
               leaveReview={leaveReview}
               deleteListing={deleteListing}
@@ -191,7 +198,12 @@ function App() {
             />
           }
         />
-        {/* <Route path="/user/:userId" element={<UserDetail />} /> */}
+        <Route
+          path="/cart"
+          element={
+            <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+          }
+        />
       </Routes>
     </>
   )

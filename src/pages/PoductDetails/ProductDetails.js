@@ -5,7 +5,7 @@ import './ProductDetails.css'
 
 const ProductDetails = ({
   selectedProduct,
-  addToCart,
+  addToCartHandler,
   editListing,
   leaveReview,
   deleteListing,
@@ -67,7 +67,7 @@ const ProductDetails = ({
               className="btn"
               onClick={
                 selectedProduct?.seller_id !== user?.id
-                  ? () => addToCart(selectedProduct?.id)
+                  ? () => addToCartHandler(selectedProduct)
                   : () => editListing(selectedProduct?.id)
               }
             >

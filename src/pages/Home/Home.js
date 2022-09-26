@@ -4,7 +4,7 @@ import ProductModalForm from '../../components/ProductModalForm/ProductModalForm
 const Home = ({
   productsFeed,
   chooseProduct,
-  addToCart,
+  addToCartHandler,
   editListing,
   deleteListing,
   leaveReview,
@@ -28,7 +28,7 @@ const Home = ({
       <ProductList
         productsFeed={productsFeed}
         chooseProduct={chooseProduct}
-        addToCart={addToCart}
+        addToCartHandler={addToCartHandler}
         editListing={editListing}
         leaveReview={leaveReview}
         deleteListing={deleteListing}

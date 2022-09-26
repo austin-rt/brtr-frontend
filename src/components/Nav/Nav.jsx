@@ -2,10 +2,11 @@ import './Nav.css'
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import UserContext from '../../context/UserContext'
+import { useCart } from '../../context/CartContext'
 
 const Nav = () => {
-  let { isAuthenticated } = useContext(UserContext)
-  let { logoutUser } = useContext(UserContext)
+  let { logoutUser, isAuthenticated } = useContext(UserContext)
+  const cartItems = useCart()
   return (
     <nav>
       <h1 className="nav__title">
@@ -30,6 +31,10 @@ const Nav = () => {
           </NavLink>
         )}
       </div>
+      <NavLink to="/cart" className="nav__link">
+        cart
+        {cartItems.length > 0 ? ` (${cartItems.length})` : ``}
+      </NavLink>
     </nav>
   )
 }

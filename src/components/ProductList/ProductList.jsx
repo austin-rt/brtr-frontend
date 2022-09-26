@@ -6,7 +6,7 @@ import './ProductList.css'
 const ProductList = ({
   productsFeed,
   chooseProduct,
-  addToCart,
+  addToCartHandler,
   editListing,
   leaveReview,
   deleteListing
@@ -16,19 +16,21 @@ const ProductList = ({
   return (
     <div className="product__list-container">
       {productsFeed.map((product) => (
-        <div
-          className="product__item-card"
-          key={product.id}
-          onClick={() => chooseProduct(product)}
-        >
-          <div className="product__image-container">
+        <div className="product__item-card" key={product.id}>
+          <div
+            className="product__image-container"
+            onClick={() => chooseProduct(product)}
+          >
             <img
               className="product__image"
               src={product.image}
               alt={product.name}
             />
           </div>
-          <div className="product__hero-info">
+          <div
+            className="product__hero-info"
+            onClick={() => chooseProduct(product)}
+          >
             <h2 className="product__name">{product.name}</h2>
             <div className="product__hero-info-grid">
               <div className="product__info-left-column">
@@ -52,7 +54,7 @@ const ProductList = ({
               onClick={
                 user
                   ? product.seller_id !== user?.id
-                    ? () => addToCart(product.id)
+                    ? () => addToCartHandler(product)
                     : () => editListing(product.id)
                   : () => navigate('/login')
               }

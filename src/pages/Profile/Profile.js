@@ -11,7 +11,7 @@ const Profile = ({
   modalVisibility,
   toggleModalVisibility,
   productFormState,
-  addToCart,
+  addToCartHandler,
   editListing,
   leaveReview,
   deleteListing,
@@ -52,7 +52,7 @@ const Profile = ({
               <ProductList
                 productsFeed={userDetails?.products}
                 chooseProduct={chooseProduct}
-                addToCart={addToCart}
+                addToCartHandler={addToCartHandler}
                 editListing={editListing}
                 leaveReview={leaveReview}
                 deleteListing={deleteListing}
